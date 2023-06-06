@@ -1,0 +1,38 @@
+#include <iostream>
+#include <random>
+#include <string>
+using namespace std;
+unsigned short hashfunction(const string& message) {
+    hash<string> hasher;
+    unsigned short hash_value = static_cast<unsigned short>(hasher(message));
+    return hash_value;
+}
+
+int main() {
+    string message;
+    cout << "Enter the message: ";
+    cin>>message;
+
+    unsigned short hash_value = hashfunction(message);
+
+    cout << "Original Message: " << message << endl;
+    cout << "Hash value: " << hash_value <<endl;
+
+    
+    string received_message;
+    cout << "Enter the received message: ";
+    cin>>received_message;
+
+    unsigned short received_hash_value = hashfunction(received_message);
+
+    cout << "Received Message: " << received_message << endl;
+    cout << "Received Hash value: " << received_hash_value <<endl;
+
+    if (received_hash_value == hash_value) {
+        cout << "Integrity: The message has not been modified." <<endl;
+    } else {
+        cout << "Integrity: The message has been modified." <<endl;
+    }
+
+    return 0;
+}
